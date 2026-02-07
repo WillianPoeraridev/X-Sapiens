@@ -16,7 +16,7 @@ function renderEmptyState() {
     emptyState.id = "empty-state";
     emptyState.className = "empty-state";
     emptyState.textContent =
-      "Nenhum h\u00e1bito ainda. Adicione o primeiro \u{1F446}";
+      "Nenhum hábito ainda. Adicione o primeiro 👆";
     form.insertAdjacentElement("afterend", emptyState);
   }
 
