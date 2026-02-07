@@ -8,8 +8,7 @@ function saveHabits() {
   localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-function renderHabits() {
-  list.innerHTML = "";
+function renderEmptyState() {
   let emptyState = document.getElementById("empty-state");
 
   if (!emptyState) {
@@ -22,41 +21,51 @@ function renderHabits() {
   }
 
   emptyState.style.display = habits.length === 0 ? "block" : "none";
+}
+
+function renderHabitItem(habit) {
+  const li = document.createElement("li");
+  li.className = habit.done ? "done" : "";
+
+  const span = document.createElement("span");
+  span.textContent = habit.name;
+
+  const toggleButton = document.createElement("button");
+  toggleButton.textContent = habit.done ? "Desmarcar" : "Feito hoje";
+
+  toggleButton.addEventListener("click", () => {
+    habit.done = !habit.done;
+    saveHabits();
+    renderHabits();
+  });
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Excluir";
+  deleteButton.className = "danger";
+
+  deleteButton.addEventListener("click", () => {
+    habits = habits.filter((item) => item.id !== habit.id);
+    saveHabits();
+    renderHabits();
+  });
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  actions.appendChild(toggleButton);
+  actions.appendChild(deleteButton);
+
+  li.appendChild(span);
+  li.appendChild(actions);
+
+  return li;
+}
+
+function renderHabits() {
+  list.innerHTML = "";
+  renderEmptyState();
 
   habits.forEach((habit) => {
-    const li = document.createElement("li");
-    li.className = habit.done ? "done" : "";
-
-    const span = document.createElement("span");
-    span.textContent = habit.name;
-
-    const toggleButton = document.createElement("button");
-    toggleButton.textContent = habit.done ? "Desmarcar" : "Feito hoje";
-
-    toggleButton.addEventListener("click", () => {
-      habit.done = !habit.done;
-      saveHabits();
-      renderHabits();
-    });
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Excluir";
-    deleteButton.className = "danger";
-
-    deleteButton.addEventListener("click", () => {
-      habits = habits.filter((item) => item.id !== habit.id);
-      saveHabits();
-      renderHabits();
-    });
-
-    const actions = document.createElement("div");
-    actions.className = "actions";
-    actions.appendChild(toggleButton);
-    actions.appendChild(deleteButton);
-
-    li.appendChild(span);
-    li.appendChild(actions);
-    list.appendChild(li);
+    list.appendChild(renderHabitItem(habit));
   });
 }
 
