@@ -18,17 +18,32 @@ function renderHabits() {
     const span = document.createElement("span");
     span.textContent = habit.name;
 
-    const button = document.createElement("button");
-    button.textContent = habit.done ? "Desmarcar" : "Feito hoje";
+    const toggleButton = document.createElement("button");
+    toggleButton.textContent = habit.done ? "Desmarcar" : "Feito hoje";
 
-    button.addEventListener("click", () => {
+    toggleButton.addEventListener("click", () => {
       habit.done = !habit.done;
       saveHabits();
       renderHabits();
     });
 
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Excluir";
+    deleteButton.className = "danger";
+
+    deleteButton.addEventListener("click", () => {
+      habits = habits.filter((item) => item.id !== habit.id);
+      saveHabits();
+      renderHabits();
+    });
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+    actions.appendChild(toggleButton);
+    actions.appendChild(deleteButton);
+
     li.appendChild(span);
-    li.appendChild(button);
+    li.appendChild(actions);
     list.appendChild(li);
   });
 }

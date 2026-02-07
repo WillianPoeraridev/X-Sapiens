@@ -74,3 +74,16 @@ li.done {
   opacity: 0.6;
   text-decoration: line-through;
 }
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.danger {
+  background: #dc2626;
+}
+
+.danger:hover {
+  background: #b91c1c;
+}
