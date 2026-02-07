@@ -52,9 +52,25 @@ function renderHabitItem(habit) {
     renderHabits();
   });
 
+  const editButton = document.createElement("button");
+  editButton.textContent = "Editar";
+
+  editButton.addEventListener("click", () => {
+    const nextName = prompt("Editar h\u00e1bito:", habit.name);
+    if (nextName === null) return;
+
+    const trimmedName = nextName.trim();
+    if (!trimmedName) return;
+
+    habit.name = trimmedName;
+    saveHabits();
+    renderHabits();
+  });
+
   const actions = document.createElement("div");
   actions.className = "actions";
   actions.appendChild(toggleButton);
+  actions.appendChild(editButton);
   actions.appendChild(deleteButton);
 
   li.appendChild(span);
