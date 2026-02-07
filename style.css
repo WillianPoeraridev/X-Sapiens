@@ -53,6 +53,14 @@ button:hover {
   background: #1d4ed8;
 }
 
+button.danger {
+  padding: 10px 15px;
+  border: none;
+  color: rgb(255, 255, 255);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -85,5 +93,12 @@ li.done {
 }
 
 .danger:hover {
-  background: #b91c1c;
+  background: #b91c1cad;
+}
+
+.empty-state {
+  margin-top: -8px;
+  margin-bottom: 16px;
+  color: #94a3b8;
+  font-size: 0.95rem;
 }

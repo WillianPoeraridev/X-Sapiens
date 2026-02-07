@@ -10,6 +10,18 @@ function saveHabits() {
 
 function renderHabits() {
   list.innerHTML = "";
+  let emptyState = document.getElementById("empty-state");
+
+  if (!emptyState) {
+    emptyState = document.createElement("p");
+    emptyState.id = "empty-state";
+    emptyState.className = "empty-state";
+    emptyState.textContent =
+      "Nenhum h\u00e1bito ainda. Adicione o primeiro \u{1F446}";
+    form.insertAdjacentElement("afterend", emptyState);
+  }
+
+  emptyState.style.display = habits.length === 0 ? "block" : "none";
 
   habits.forEach((habit) => {
     const li = document.createElement("li");
