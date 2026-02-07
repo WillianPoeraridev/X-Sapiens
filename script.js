@@ -44,6 +44,9 @@ function renderHabitItem(habit) {
   deleteButton.className = "danger";
 
   deleteButton.addEventListener("click", () => {
+    const ok = confirm(`Excluir o hábito "${habit.name}"?`);
+    if (!ok) return;
+
     habits = habits.filter((item) => item.id !== habit.id);
     saveHabits();
     renderHabits();
