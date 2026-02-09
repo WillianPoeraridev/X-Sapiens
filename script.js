@@ -2,8 +2,10 @@ const form = document.getElementById("habit-form");
 const input = document.getElementById("habit-input");
 const list = document.getElementById("habit-list");
 
-let habits = JSON.parse(localStorage.getItem("habits")) || [];
 
+let habits = JSON.parse(localStorage.getItem("habits")) || [];
+ // Estado do app: lista de hábitos persistida no navegador (MVP sem backend).
+ // Decisão: localStorage para reduzir escopo e focar em DOM/eventos.
 function saveHabits() {
   localStorage.setItem("habits", JSON.stringify(habits));
 }
@@ -80,6 +82,9 @@ function renderHabitItem(habit) {
 }
 
 function renderHabits() {
+ // Decisão: renderização "simples" (recria a lista) para manter o código fácil de manter no MVP.
+ // Para listas enormes, seria melhor atualizar só o item alterado.
+
   list.innerHTML = "";
   renderEmptyState();
 
@@ -94,6 +99,7 @@ form.addEventListener("submit", (event) => {
   const habitName = input.value.trim();
   if (!habitName) return;
 
+ // Decisão: normalizar texto (trim + lower) para evitar duplicados por variação de caixa/espaços.
   const normalized = habitName.toLowerCase();
   const alreadyExists = habits.some(
     (h) => h.name.trim().toLowerCase() === normalized
