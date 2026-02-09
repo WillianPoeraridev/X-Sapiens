@@ -94,6 +94,16 @@ form.addEventListener("submit", (event) => {
   const habitName = input.value.trim();
   if (!habitName) return;
 
+  const normalized = habitName.toLowerCase();
+  const alreadyExists = habits.some(
+    (h) => h.name.trim().toLowerCase() === normalized
+  );
+
+  if (alreadyExists) {
+    alert("Esse hábito já existe na lista.");
+    return;
+  }
+
   habits.push({
     id: Date.now(),
     name: habitName,
