@@ -102,3 +102,23 @@ li.done {
   color: #94a3b8;
   font-size: 0.95rem;
 }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.filter {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #1e293b;
+  background: #0b1220;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.filter.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}

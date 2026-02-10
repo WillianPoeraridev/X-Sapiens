@@ -2,27 +2,66 @@ const form = document.getElementById("habit-form");
 const input = document.getElementById("habit-input");
 const list = document.getElementById("habit-list");
 
-
+let currentFilter = "all";
 let habits = JSON.parse(localStorage.getItem("habits")) || [];
- // Estado do app: lista de hábitos persistida no navegador (MVP sem backend).
- // Decisão: localStorage para reduzir escopo e focar em DOM/eventos.
+
+const filterButtons = document.querySelectorAll(".filter");
+
+function setActiveFilterButton() {
+  filterButtons.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.filter === currentFilter);
+  });
+}
+
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    setActiveFilterButton();
+    renderHabits();
+  });
+});
+
+function getVisibleHabits() {
+  if (currentFilter === "pending") return habits.filter((h) => !h.done);
+  if (currentFilter === "done") return habits.filter((h) => h.done);
+  return habits;
+}
+
+// Estado do app: lista de hábitos persistida no navegador (MVP sem backend).
+// Decisão: localStorage para reduzir escopo e focar em DOM/eventos.
 function saveHabits() {
   localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-function renderEmptyState() {
+function renderEmptyState(visibleCount) {
   let emptyState = document.getElementById("empty-state");
 
   if (!emptyState) {
     emptyState = document.createElement("p");
     emptyState.id = "empty-state";
     emptyState.className = "empty-state";
-    emptyState.textContent =
-      "Nenhum hábito ainda. Adicione o primeiro 👆";
-    form.insertAdjacentElement("afterend", emptyState);
+
+    const filtersContainer = document.querySelector(".filters");
+    (filtersContainer ?? form).insertAdjacentElement("afterend", emptyState);
   }
 
-  emptyState.style.display = habits.length === 0 ? "block" : "none";
+  if (visibleCount === 0) {
+    emptyState.style.display = "block";
+
+    if (habits.length === 0) {
+      emptyState.textContent = "Nenhum hábito ainda. Adicione o primeiro 👆";
+      return;
+    }
+
+    emptyState.textContent =
+      currentFilter === "done"
+        ? "Nenhum hábito concluído ainda."
+        : currentFilter === "pending"
+        ? "Nenhum hábito pendente."
+        : "Nenhum hábito para mostrar.";
+  } else {
+    emptyState.style.display = "none";
+  }
 }
 
 function renderHabitItem(habit) {
@@ -58,7 +97,7 @@ function renderHabitItem(habit) {
   editButton.textContent = "Editar";
 
   editButton.addEventListener("click", () => {
-    const nextName = prompt("Editar h\u00e1bito:", habit.name);
+    const nextName = prompt("Editar hábito:", habit.name);
     if (nextName === null) return;
 
     const trimmedName = nextName.trim();
@@ -82,13 +121,15 @@ function renderHabitItem(habit) {
 }
 
 function renderHabits() {
- // Decisão: renderização "simples" (recria a lista) para manter o código fácil de manter no MVP.
- // Para listas enormes, seria melhor atualizar só o item alterado.
+  // Decisão: renderização "simples" (recria a lista) para manter o código fácil no MVP.
+  // Para listas enormes, seria melhor atualizar só o item alterado.
 
   list.innerHTML = "";
-  renderEmptyState();
 
-  habits.forEach((habit) => {
+  const visibleHabits = getVisibleHabits();
+  renderEmptyState(visibleHabits.length);
+
+  visibleHabits.forEach((habit) => {
     list.appendChild(renderHabitItem(habit));
   });
 }
@@ -99,7 +140,7 @@ form.addEventListener("submit", (event) => {
   const habitName = input.value.trim();
   if (!habitName) return;
 
- // Decisão: normalizar texto (trim + lower) para evitar duplicados por variação de caixa/espaços.
+  // Decisão: normalizar texto (trim + lower) para evitar duplicados por variação de caixa/espaços.
   const normalized = habitName.toLowerCase();
   const alreadyExists = habits.some(
     (h) => h.name.trim().toLowerCase() === normalized
@@ -121,4 +162,5 @@ form.addEventListener("submit", (event) => {
   renderHabits();
 });
 
+setActiveFilterButton();
 renderHabits();
