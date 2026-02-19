@@ -3,7 +3,7 @@ const input = document.getElementById("habit-input");
 const list = document.getElementById("habit-list");
 
 let currentFilter = "all";
-let habits = JSON.parse(localStorage.getItem("habits")) || [];
+let habits = JSON.parse(localStorage.getItem("habits")) || []; // Carrega hábitos do localStorage ou inicia com lista vazia.
 
 const filterButtons = document.querySelectorAll(".filter");
 
@@ -11,7 +11,7 @@ function setActiveFilterButton() {
   filterButtons.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.filter === currentFilter);
   });
-}
+}  // Decisão: usar dataset para associar cada botão ao seu filtro, facilitando a manutenção e evitando hardcoding.
 
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -67,7 +67,7 @@ function renderEmptyState(visibleCount) {
 function renderHabitItem(habit) {
   const li = document.createElement("li");
   li.className = habit.done ? "done" : "";
-
+   
   const span = document.createElement("span");
   span.textContent = habit.name;
 
@@ -136,7 +136,7 @@ function renderHabits() {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
+ 
   const habitName = input.value.trim();
   if (!habitName) return;
 
@@ -163,4 +163,4 @@ form.addEventListener("submit", (event) => {
 });
 
 setActiveFilterButton();
-renderHabits();
+renderHabits(console.log("App iniciado"));

@@ -1,63 +1,86 @@
-# X.Sapiens 
+# X.Sapiens
 
-X.Sapiens é um projeto de aprendizado contínuo focado na construção de software de forma prática, organizada e orientada a produto, utilizando programação e IA como ferramentas de apoio.
+X.Sapiens é um projeto de aprendizado contínuo focado em construir software de forma prática, organizada e com evolução incremental.  
+O objetivo é treinar fundamentos (HTML/CSS/JavaScript), Git/GitHub e uso de IA como apoio, sempre com entregas pequenas e consistentes.
 
-Este repositório faz parte de um plano estruturado de 6 meses com o objetivo de evoluir dos fundamentos até a preparação para o primeiro emprego como desenvolvedor.
+> Status atual: **MVP Habit Tracker (front-end puro + persistência local)**
 
+---
 
-## Objetivo do Projeto
+## ✅ O que já existe (MVP)
 
-- Praticar fundamentos sólidos de programação
-- Desenvolver projetos reais, mesmo que pequenos
-- Criar o hábito de organização, versionamento e documentação
-- Usar IA como apoio consciente (revisão, explicação e análise), não como muleta
-- Evoluir de forma consistente seguindo um plano de estudo de longo prazo
+- Adicionar hábitos
+- Marcar como concluído / não concluído
+- Editar hábito
+- Excluir hábito
+- Filtro de visualização (ex: todos / pendentes / concluídos)
+- Persistência no navegador via `localStorage`
 
+---
 
-## Estrutura (em evolução)
+## 🧠 O que estou treinando aqui
 
-Este projeto será construído aos poucos. A estrutura pode mudar conforme o aprendizado avança.
+- Manipulação do DOM (criação/atualização de elementos)
+- Estado em memória (arrays/objetos) + renderização
+- Fluxo de eventos (event listeners)
+- Persistência simples com `localStorage` + `JSON`
+- Organização incremental + commits pequenos
 
-Exemplos do que pode aparecer aqui:
-- pequenos experimentos
-- módulos simples
-- protótipos
-- versões iniciais de ideias maiores
+---
 
+## ▶️ Como rodar localmente (Live Server)
 
-## 🛠️ Tecnologias (até o momento)
+1. Abra o projeto no **VS Code**
+2. Instale a extensão **Live Server**
+3. Clique com o botão direito em `index.html` → **Open with Live Server**
 
-- JavaScript
-- HTML / CSS
+Pronto. O app abre no navegador e recarrega automaticamente a cada alteração.
+
+---
+
+## 🧱 Estrutura do projeto
+
+- `index.html` → estrutura da interface
+- `style.css` → estilos
+- `script.js` → lógica do app (estado, eventos, render, persistência)
+- `docs/` → anotações e decisões (ex: ADRs)
+- `README.md` → visão geral do projeto
+
+---
+
+## 🗺️ Roadmap (alto nível)
+
+### Concluído
+- [x] Definir primeira ideia simples: **Habit Tracker (MVP)**
+- [x] CRUD de hábitos (add/edit/delete)
+- [x] Marcar como concluído
+- [x] Persistência com `localStorage`
+- [x] Filtro de hábitos
+
+### Próximos passos (curto prazo)
+- [ ] Contadores: Pendentes / Concluídos
+- [ ] Botão “Limpar concluídos”
+- [ ] Validações: bloquear hábito vazio/duplicado
+- [ ] Melhorar acessibilidade (labels, foco, teclado)
+
+### Futuro (quando fizer sentido)
+- [ ] Refatorar para arquitetura mais modular
+- [ ] Versão com Next.js + TypeScript
+- [ ] Persistência em banco (Supabase/PostgreSQL) + autenticação
+
+---
+
+## 🧰 Tecnologias
+
+- HTML
+- CSS
+- JavaScript (Vanilla)
 - Git & GitHub
-- IA como ferramenta de apoio ao desenvolvimento
+- Live Server (desenvolvimento local)
 
-*(Outras tecnologias serão adicionadas conforme a evolução do projeto)*
+---
 
+## 📌 Notas
 
-## 📌 Metodologia
-
-- Commits pequenos e frequentes
-- Organização acima de pressa
-- Aprendizado prático antes de abstrações complexas
-- Evolução incremental (versões simples primeiro)
-- Revisão explicando **por que** algo foi feito, não só **como**
-
-
-## 🧭 Status do Projeto
-
-🚧 Em estágio inicial  
-Este projeto está no começo e evoluirá continuamente ao longo do plano de estudos.
-
-
-## 📝 Notas de Aprendizado
-
-As principais reflexões e aprendizados serão registrados conforme o projeto evoluir.
-
-
-## 📅 Roadmap (alto nível)
-
-- [ ] Definir primeira ideia simples do X.Sapiens
-- [ ] Criar primeira funcionalidade mínima
-- [ ] Evoluir estrutura e organização do código
-- [ ] Refatorar conforme novos conhecimentos forem adquiridos
+Este repositório evolui por iterações pequenas.  
+Mudanças relevantes serão refletidas no README e/ou em `docs/`.
