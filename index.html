@@ -20,7 +20,34 @@
       />
       <button type="submit">Adicionar</button>
     </form>
-    
+    <section class="stats" aria-label="Resumo de hábitos">
+  <div class="stat">
+    <div class="label">Total</div>
+    <div class="value" id="stat-total">0</div>
+  </div>
+
+  <div class="stat">
+    <div class="label">Pendentes</div>
+    <div class="value" id="stat-pending">0</div>
+  </div>
+
+  <div class="stat">
+    <div class="label">Feitos</div>
+    <div class="value" id="stat-done">0</div>
+  </div>
+
+  <div class="progress-wrap" aria-label="Progresso do dia">
+    <div class="progress-meta">
+      <span>Progresso</span>
+      <strong id="stat-percent">0%</strong>
+    </div>
+
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-bar" id="stat-progressbar" style="width: 0%"></div>
+    </div>
+  </div>
+</section>
+
     <div class="filters" aria-label="Filtros de hábitos">
   <button type="button" class="filter active" data-filter="all">Todos</button>
   <button type="button" class="filter" data-filter="pending">Pendentes</button>

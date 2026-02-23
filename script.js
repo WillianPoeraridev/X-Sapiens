@@ -7,6 +7,32 @@ let habits = JSON.parse(localStorage.getItem("habits")) || []; // Carrega hábit
 
 const filterButtons = document.querySelectorAll(".filter");
 
+function updateStats() {
+  const total = habits.length;
+  const doneCount = habits.filter((h) => h.done).length;
+  const pendingCount = total - doneCount;
+  const percent = total === 0 ? 0 : Math.round((doneCount / total) * 100);
+
+  const totalEl = document.getElementById("stat-total");
+  const pendingEl = document.getElementById("stat-pending");
+  const doneEl = document.getElementById("stat-done");
+  const percentEl = document.getElementById("stat-percent");
+  const barEl = document.getElementById("stat-progressbar");
+
+  // Se o painel ainda não existir no DOM, não faz nada (seguro para MVP).
+  if (!totalEl || !pendingEl || !doneEl || !percentEl || !barEl) return;
+
+  totalEl.textContent = String(total);
+  pendingEl.textContent = String(pendingCount);
+  doneEl.textContent = String(doneCount);
+  percentEl.textContent = `${percent}%`;
+
+  barEl.style.width = `${percent}%`;
+
+  const progress = document.querySelector(".progress");
+  if (progress) progress.setAttribute("aria-valuenow", String(percent));
+}
+
 function setActiveFilterButton() {
   filterButtons.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.filter === currentFilter);
